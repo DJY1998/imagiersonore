@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Sound Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        img {
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .speed-control {
+            margin-top: 20px;
+        }
+        input[type="range"] {
+            width: 200px;
+        }
+        .playback-info {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Clique sur l'image pour entendre le mot</h1>
+
+    <!-- Image that plays sound when clicked -->
+    <img id="image" src="bateau.jpg" alt="Bateau">
+
+    <!-- Playback Speed Controls -->
+    <div class="speed-control">
+        <label for="speed">Vitesse de lecture: </label>
+        <input type="range" id="speed" min="0.5" max="2" step="0.1" value="1">
+        <span id="speedValue">1x</span>
+    </div>
+
+    <!-- Audio file -->
+    <audio id="audio" src="bateau.mp3"></audio>
+
+    <!-- Playback Info -->
+    <div class="playback-info">
+        Vitesse actuelle: <span id="currentSpeed">1x</span>
+    </div>
+
+    <script>
+        // Get the HTML elements
+        const image = document.getElementById('image');
+        const audio = document.getElementById('audio');
+        const speedControl = document.getElementById('speed');
+        const speedValue = document.getElementById('speedValue');
+        const currentSpeed = document.getElementById('currentSpeed');
+
+        // Play the audio when the image is clicked
+        image.addEventListener('click', () => {
+            audio.play();
+        });
+
+        // Update the playback speed when the slider is adjusted
+        speedControl.addEventListener('input', () => {
+            const playbackRate = speedControl.value;
+            audio.playbackRate = playbackRate;
+            speedValue.textContent = `${playbackRate}x`;
+            currentSpeed.textContent = `${playbackRate}x`;
+        });
+    </script>
+
+</body>
+</html>
